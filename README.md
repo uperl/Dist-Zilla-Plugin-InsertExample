@@ -1,45 +1,39 @@
-=pod
+# Dist::Zilla::Plugin::InsertExample
 
-=head1 NAME
+Insert example into your POD from a file
 
-Dist::Zilla::Plugin::InsertExample - Insert example into your POD from a file
-
-=head1 VERSION
-
-version 0.02
-
-=head1 SYNOPSIS
+# SYNOPSIS
 
 In your dist.ini:
 
- [InsertExample]
+    [InsertExample]
 
 In your POD:
 
- =head1 EXAMPLE
- 
- Here is an exaple that writes hello world to the terminal:
- 
- # EXAMPLE: example/hello.pl
+    =head1 EXAMPLE
+    
+    Here is an exaple that writes hello world to the terminal:
+    
+    # EXAMPLE: example/hello.pl
 
 File in your dist named example/hello.pl
 
- #!/usr/bin/perl
- say 'hello world';
+    #!/usr/bin/perl
+    say 'hello world';
 
 After dzil build your POD becomes:
 
- =head1 EXAMPLE
- 
- Here is an example that writes hello world to the terminal:
- 
-  #!/usr/bin/perl
-  say 'hello world';
+    =head1 EXAMPLE
+    
+    Here is an example that writes hello world to the terminal:
+    
+    #!/usr/bin/perl
+    say 'hello world';
 
 and example/hello.pl is there too (unless you prune it with another
 plugin).
 
-=head1 DESCRIPTION
+# DESCRIPTION
 
 This plugin takes examples included in your distribution and
 inserts them in your POD where you have an EXAMPLE directive.
@@ -52,14 +46,13 @@ When the example is inserted into your pod a space will be appended
 at the start of each line so that it is printed in a fixed width
 font.
 
-=head1 AUTHOR
+# AUTHOR
 
 Graham Ollis <plicease@cpan.org>
 
-=head1 COPYRIGHT AND LICENSE
+# COPYRIGHT AND LICENSE
 
 This software is copyright (c) 2013 by Graham Ollis.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
-
