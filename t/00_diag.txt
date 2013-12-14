@@ -1,7 +1,4 @@
 Dist::Zilla
-Dist::Zilla::Role::FileFinderUser
-Dist::Zilla::Role::FileMunger
 ExtUtils::MakeMaker
 Moose
-Test::DZil
 Test::More
