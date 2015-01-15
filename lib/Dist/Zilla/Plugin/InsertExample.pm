@@ -51,12 +51,21 @@ When the example is inserted into your pod a space will be appended
 at the start of each line so that it is printed in a fixed width
 font.
 
+=head1 OPTIONS
+
+=head2 remove_boiler
+
+Remove the "#!/usr/bin/perl", "use strict;" or "use warnings;" from
+the beginning of your example before inserting them into the POD.
+
 =cut
 
 with 'Dist::Zilla::Role::FileMunger';
 with 'Dist::Zilla::Role::FileFinderUser' => {
   default_finders => [ qw( :InstallModules :ExecFiles ) ],
 };
+
+has remove_boiler => (is => 'ro', isa => 'Int');
 
 sub munge_files
 {
@@ -84,7 +93,24 @@ sub _slurp_example
   {
     $self->log_fatal("no such example file $filename");
   }
-  join "\n", map { " $_" } split /\n\r?/, $file->slurp;
+  if($self->remove_boiler)
+  {
+    my $fh = $file->openr;
+    my $buffer;
+    while(<$fh>)
+    {
+      next if /^\s*$/;
+      next if /^#!\/usr\/bin\/perl/;
+      next if /^use strict;$/;
+      next if /^use warnings;$/;
+      return '' if eof $fh;
+      return join "\n", map { " $_" } split /\n\r?/, $_ . do { local $/; <$fh> };
+    }
+  }
+  else
+  {
+    return join "\n", map { " $_" } split /\n\r?/, $file->slurp;
+  }
 }
 
 __PACKAGE__->meta->make_immutable;

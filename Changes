@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - added the remove_boiler option
 
 0.03      2013-12-13 21:19:45 -0500
   - documentation
