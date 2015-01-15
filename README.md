@@ -27,8 +27,8 @@ After dzil build your POD becomes:
     
     Here is an example that writes hello world to the terminal:
     
-    #!/usr/bin/perl
-    say 'hello world';
+     #!/usr/bin/perl
+     say 'hello world';
 
 and example/hello.pl is there too (unless you prune it with another
 plugin).
@@ -45,6 +45,13 @@ updating example scripts in multiple places.
 When the example is inserted into your pod a space will be appended
 at the start of each line so that it is printed in a fixed width
 font.
+
+# OPTIONS
+
+## remove\_boiler
+
+Remove the "#!/usr/bin/perl", "use strict;" or "use warnings;" from
+the beginning of your example before inserting them into the POD.
 
 # AUTHOR
 
