@@ -55,7 +55,7 @@ the beginning of your example before inserting them into the POD.
 
 # AUTHOR
 
-Graham Ollis <plicease@cpan.org>
+Graham Ollis &lt;plicease@cpan.org>
 
 # COPYRIGHT AND LICENSE
 

@@ -104,12 +104,12 @@ sub _slurp_example
       next if /^use strict;$/;
       next if /^use warnings;$/;
       return '' if eof $fh;
-      return join "\n", map { " $_" } split /\n\r?/, $_ . do { local $/; <$fh> };
+      return join "\n", map { " $_" } split /\n/, $_ . do { local $/; <$fh> };
     }
   }
   else
   {
-    return join "\n", map { " $_" } split /\n\r?/, $file->slurp;
+    return join "\n", map { " $_" } split /\n/, $file->slurp;
   }
 }
 
