@@ -46,6 +46,11 @@ When the example is inserted into your pod a space will be appended
 at the start of each line so that it is printed in a fixed width
 font.
 
+This plugin will first look for examples in the currently
+building distribution, including generated and munged files.
+If no matching filename is found, it will look in the distribution
+source root.
+
 # OPTIONS
 
 ## remove\_boiler

@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.05      2016-03-16 11:00:06 -0400
   - Search for files in the building dist first
 
 0.04      2015-01-15 06:33:01 -0500
