@@ -1,4 +1,0 @@
-Dist::Zilla
-ExtUtils::MakeMaker
-Moose
-Test::More
