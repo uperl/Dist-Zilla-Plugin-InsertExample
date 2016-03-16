@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Search for files in the building dist first
 
 0.04      2015-01-15 06:33:01 -0500
   - added the remove_boiler option

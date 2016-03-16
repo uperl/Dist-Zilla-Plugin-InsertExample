@@ -3,6 +3,7 @@ package Dist::Zilla::Plugin::InsertExample;
 use strict;
 use warnings;
 use Moose;
+use List::Util qw( first );
 
 # ABSTRACT: Insert example into your POD from a file
 # VERSION
@@ -51,11 +52,16 @@ When the example is inserted into your pod a space will be appended
 at the start of each line so that it is printed in a fixed width
 font.
 
+This plugin will first look for examples in the currently
+building distribution, including generated and munged files.
+If no matching filename is found, it will look in the distribution
+source root.
+
 =head1 OPTIONS
 
 =head2 remove_boiler
 
-Remove the "#!/usr/bin/perl", "use strict;" or "use warnings;" from
+Remove the C<#!/usr/bin/perl>, C<use strict;> or C<use warnings;> from
 the beginning of your example before inserting them into the POD.
 
 =cut
@@ -88,29 +94,34 @@ sub munge_file
 sub _slurp_example
 {
   my($self, $filename) = @_;
-  my $file = $self->zilla->root->file($filename);
-  unless(-r $file)
+
+  my $fh;
+
+  if(my $file = first { $_->name eq $filename } @{ $self->zilla->files })
   {
-    $self->log_fatal("no such example file $filename");
+    $DB::single = 1;
+    my $content = $file->content;
+    open $fh, '<', \$content;
   }
-  if($self->remove_boiler)
+  elsif($file = $self->zilla->root->file($filename))
   {
-    my $fh = $file->openr;
-    my $buffer;
-    while(<$fh>)
+    $self->log_fatal("no such example file $filename") unless -r $file;
+    $fh = $file->openr;  
+  }
+
+  while(<$fh>)
+  {
+    if($self->remove_boiler)
     {
       next if /^\s*$/;
       next if /^#!\/usr\/bin\/perl/;
       next if /^use strict;$/;
       next if /^use warnings;$/;
       return '' if eof $fh;
-      return join "\n", map { " $_" } split /\n/, $_ . do { local $/; <$fh> };
     }
+    return join "\n", map { " $_" } split /\n/, $_ . do { local $/; my $rest = <$fh>; defined $rest ? $rest : '' };
   }
-  else
-  {
-    return join "\n", map { " $_" } split /\n/, $file->slurp;
-  }
+
 }
 
 __PACKAGE__->meta->make_immutable;

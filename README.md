@@ -50,7 +50,7 @@ font.
 
 ## remove\_boiler
 
-Remove the "#!/usr/bin/perl", "use strict;" or "use warnings;" from
+Remove the `#!/usr/bin/perl`, `use strict;` or `use warnings;` from
 the beginning of your example before inserting them into the POD.
 
 # AUTHOR
