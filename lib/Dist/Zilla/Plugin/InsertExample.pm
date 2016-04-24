@@ -3,6 +3,7 @@ package Dist::Zilla::Plugin::InsertExample;
 use strict;
 use warnings;
 use Moose;
+use Path::Class qw( dir );
 use List::Util qw( first );
 
 # ABSTRACT: Insert example into your POD from a file
@@ -103,7 +104,7 @@ sub _slurp_example
     my $content = $file->content;
     open $fh, '<', \$content;
   }
-  elsif($file = $self->zilla->root->file($filename))
+  elsif($file = dir($self->zilla->root)->file($filename))
   {
     $self->log_fatal("no such example file $filename") unless -r $file;
     $fh = $file->openr;  

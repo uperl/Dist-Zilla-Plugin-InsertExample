@@ -13,6 +13,7 @@ $modules{$_} = $_ for qw(
   Dist::Zilla
   ExtUtils::MakeMaker
   Moose
+  Path::Class
   Test::More
 );
 
