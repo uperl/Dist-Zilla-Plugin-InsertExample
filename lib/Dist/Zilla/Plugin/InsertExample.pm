@@ -100,7 +100,6 @@ sub _slurp_example
 
   if(my $file = first { $_->name eq $filename } @{ $self->zilla->files })
   {
-    $DB::single = 1;
     my $content = $file->content;
     open $fh, '<', \$content;
   }
