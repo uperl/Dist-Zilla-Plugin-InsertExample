@@ -1,5 +1,6 @@
 use strict;
 use warnings;
+use lib '.';
 use Test::More 0.88;
 use Test::DZil;
 
