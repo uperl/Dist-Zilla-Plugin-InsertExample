@@ -58,6 +58,14 @@ source root.
 Remove the `#!/usr/bin/perl`, `use strict;` or `use warnings;` from
 the beginning of your example before inserting them into the POD.
 
+## indent
+
+Specifies the number of spaces to indent by.  This is 1 by default,
+because it is sufficient to force POD to consider it a verbatim
+paragraph.  I understand a lot of Perl programmers out there prefer
+4 spaces.  You can also set this to 0 to get no indentation at all
+and it won't be a verbatim paragraph at all.
+
 # AUTHOR
 
 Graham Ollis <plicease@cpan.org>

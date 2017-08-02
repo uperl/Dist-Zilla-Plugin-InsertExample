@@ -65,6 +65,14 @@ source root.
 Remove the C<#!/usr/bin/perl>, C<use strict;> or C<use warnings;> from
 the beginning of your example before inserting them into the POD.
 
+=head2 indent
+
+Specifies the number of spaces to indent by.  This is 1 by default,
+because it is sufficient to force POD to consider it a verbatim
+paragraph.  I understand a lot of Perl programmers out there prefer
+4 spaces.  You can also set this to 0 to get no indentation at all
+and it won't be a verbatim paragraph at all.
+
 =cut
 
   with 'Dist::Zilla::Role::FileMunger';
@@ -73,6 +81,7 @@ the beginning of your example before inserting them into the POD.
   };
 
   has remove_boiler => (is => 'ro', isa => 'Int');
+  has indent        => (is => 'ro', isa => 'Int', default => 1);
 
   sub munge_files
   {
@@ -109,6 +118,8 @@ the beginning of your example before inserting them into the POD.
       $fh = $file->openr;  
     }
 
+    my $indent = ' ' x $self->indent;
+
     while(<$fh>)
     {
       if($self->remove_boiler)
@@ -119,7 +130,7 @@ the beginning of your example before inserting them into the POD.
         next if /^use warnings;$/;
         return '' if eof $fh;
       }
-      return join "\n", map { " $_" } split /\n/, $_ . do { local $/; my $rest = <$fh>; defined $rest ? $rest : '' };
+      return join "\n", map { "$indent$_" } split /\n/, $_ . do { local $/; my $rest = <$fh>; defined $rest ? $rest : '' };
     }
 
   }
