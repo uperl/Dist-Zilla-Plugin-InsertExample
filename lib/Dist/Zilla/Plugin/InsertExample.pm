@@ -1,12 +1,13 @@
-package Dist::Zilla::Plugin::InsertExample;
-
 use strict;
 use warnings;
-use Moose;
-use List::Util qw( first );
+use 5.014;
 
-# ABSTRACT: Insert example into your POD from a file
-# VERSION
+package Dist::Zilla::Plugin::InsertExample {
+
+  use Moose;
+  use List::Util qw( first );
+
+  # ABSTRACT: Insert example into your POD from a file
 
 =head1 SYNOPSIS
 
@@ -66,63 +67,64 @@ the beginning of your example before inserting them into the POD.
 
 =cut
 
-with 'Dist::Zilla::Role::FileMunger';
-with 'Dist::Zilla::Role::FileFinderUser' => {
-  default_finders => [ qw( :InstallModules :ExecFiles ) ],
-};
+  with 'Dist::Zilla::Role::FileMunger';
+  with 'Dist::Zilla::Role::FileFinderUser' => {
+    default_finders => [ qw( :InstallModules :ExecFiles ) ],
+  };
 
-has remove_boiler => (is => 'ro', isa => 'Int');
+  has remove_boiler => (is => 'ro', isa => 'Int');
 
-sub munge_files
-{
-  my($self) = @_;
-  $self->munge_file($_) for @{ $self->found_files };
-}
-
-sub munge_file
-{
-  my($self, $file) = @_;
-
-  my $content = $file->content;
-  if($content =~ s{^#\s*EXAMPLE:\s*(.*)\s*$}{$self->_slurp_example($1)."\n"}meg)
+  sub munge_files
   {
-    $self->log([ 'adding examples in %s', $file->name]);
-    $file->content($content);
+    my($self) = @_;
+    $self->munge_file($_) for @{ $self->found_files };
   }
-}
 
-sub _slurp_example
-{
-  my($self, $filename) = @_;
-
-  my $fh;
-
-  if(my $file = first { $_->name eq $filename } @{ $self->zilla->files })
+  sub munge_file
   {
+    my($self, $file) = @_;
+  
     my $content = $file->content;
-    open $fh, '<', \$content;
-  }
-  elsif($file = $self->zilla->root->child($filename))
-  {
-    $self->log_fatal("no such example file $filename") unless -r $file;
-    $fh = $file->openr;  
-  }
-
-  while(<$fh>)
-  {
-    if($self->remove_boiler)
+    if($content =~ s{^#\s*EXAMPLE:\s*(.*)\s*$}{$self->_slurp_example($1)."\n"}meg)
     {
-      next if /^\s*$/;
-      next if /^#!\/usr\/bin\/perl/;
-      next if /^use strict;$/;
-      next if /^use warnings;$/;
-      return '' if eof $fh;
+      $self->log([ 'adding examples in %s', $file->name]);
+      $file->content($content);
     }
-    return join "\n", map { " $_" } split /\n/, $_ . do { local $/; my $rest = <$fh>; defined $rest ? $rest : '' };
   }
 
-}
+  sub _slurp_example
+  {
+    my($self, $filename) = @_;
+ 
+    my $fh;
 
-__PACKAGE__->meta->make_immutable;
+    if(my $file = first { $_->name eq $filename } @{ $self->zilla->files })
+    {
+      my $content = $file->content;
+      open $fh, '<', \$content;
+    }
+    elsif($file = $self->zilla->root->child($filename))
+    {
+      $self->log_fatal("no such example file $filename") unless -r $file;
+      $fh = $file->openr;  
+    }
+
+    while(<$fh>)
+    {
+      if($self->remove_boiler)
+      {
+        next if /^\s*$/;
+        next if /^#!\/usr\/bin\/perl/;
+        next if /^use strict;$/;
+        next if /^use warnings;$/;
+        return '' if eof $fh;
+      }
+      return join "\n", map { " $_" } split /\n/, $_ . do { local $/; my $rest = <$fh>; defined $rest ? $rest : '' };
+    }
+
+  }
+
+  __PACKAGE__->meta->make_immutable;
+}
 
 1;
