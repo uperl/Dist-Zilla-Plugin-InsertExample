@@ -11,6 +11,7 @@ my $post_diag;
 
 $modules{$_} = $_ for qw(
   Dist::Zilla
+  Encode
   ExtUtils::MakeMaker
   Moose
   Test2::V0

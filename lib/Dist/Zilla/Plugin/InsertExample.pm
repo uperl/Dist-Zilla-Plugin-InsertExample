@@ -5,6 +5,7 @@ use 5.014;
 package Dist::Zilla::Plugin::InsertExample {
 
   use Moose;
+  use Encode qw( encode );
   use List::Util qw( first );
 
   # ABSTRACT: Insert example into your POD from a file
@@ -109,13 +110,15 @@ and it won't be a verbatim paragraph at all.
 
     if(my $file = first { $_->name eq $filename } @{ $self->zilla->files })
     {
-      my $content = $file->content;
-      open $fh, '<', \$content;
+      my $content = encode 'UTF-8', $file->content;
+      open $fh, '<', \$content
+        or $self->log_fatal("unable to open content of @{[ $file->name ]} as in memory string");
+      binmode $fh, ':utf8';
     }
     elsif($file = $self->zilla->root->child($filename))
     {
       $self->log_fatal("no such example file $filename") unless -r $file;
-      $fh = $file->openr;
+      $fh = $file->openr_utf8;
     }
 
     my $indent = ' ' x $self->indent;

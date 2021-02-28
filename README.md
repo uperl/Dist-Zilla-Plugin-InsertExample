@@ -1,4 +1,4 @@
-# Dist::Zilla::Plugin::InsertExample [![Build Status](https://api.travis-ci.com/plicease/Dist-Zilla-Plugin-InsertExample.svg?branch=master)](https://travis-ci.com/github/plicease/Dist-Zilla-Plugin-InsertExample)
+# Dist::Zilla::Plugin::InsertExample [![Build Status](https://api.travis-ci.com/plicease/Dist-Zilla-Plugin-InsertExample.svg?branch=main)](https://travis-ci.com/github/plicease/Dist-Zilla-Plugin-InsertExample)
 
 Insert example into your POD from a file
 
