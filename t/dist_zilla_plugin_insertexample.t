@@ -7,8 +7,8 @@ subtest basics => sub {
 
   my $tzil = Builder->from_config(
     { dist_root => 'corpus/DZT' },
-    { 
-      add_files => { 
+    {
+      add_files => {
         'source/dist.ini' => simple_ini(
           {},
           [ 'GatherDir', { exclude_filename => [ 'example/foo.pl' ] } ],
@@ -28,8 +28,8 @@ subtest 'from generated' => sub {
 
   my $tzil = Builder->from_config(
     { dist_root => 'corpus/DZT2' },
-    { 
-      add_files => { 
+    {
+      add_files => {
         'source/dist.ini' => simple_ini(
           {},
           'GatherDir',
@@ -43,7 +43,7 @@ subtest 'from generated' => sub {
   $tzil->build;
 
   my($pm) = grep { $_->name eq 'lib/DZT.pm' } @{ $tzil->files };
-  
+
   ok $pm->content =~ m{^ here is a generated file$}m, "module contains example file";
 };
 
@@ -51,8 +51,8 @@ subtest 'from generated' => sub {
 
   my $tzil = Builder->from_config(
     { dist_root => 'corpus/DZT2' },
-    { 
-      add_files => { 
+    {
+      add_files => {
         'source/dist.ini' => simple_ini(
           {},
           'GatherDir',
@@ -66,7 +66,7 @@ subtest 'from generated' => sub {
   $tzil->build;
 
   my($pm) = grep { $_->name eq 'lib/DZT.pm' } @{ $tzil->files };
-  
+
   ok $pm->content =~ m{^    here is a generated file$}m, "module contains example file";
 };
 

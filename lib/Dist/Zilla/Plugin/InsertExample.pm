@@ -46,7 +46,7 @@ This plugin takes examples included in your distribution and
 inserts them in your POD where you have an EXAMPLE directive.
 This allows you to keep a version in the distribution which
 can be run by you and your users, as well as making it
-available in your POD documentation, without the need for 
+available in your POD documentation, without the need for
 updating example scripts in multiple places.
 
 When the example is inserted into your pod a space will be appended
@@ -92,7 +92,7 @@ and it won't be a verbatim paragraph at all.
   sub munge_file
   {
     my($self, $file) = @_;
-  
+
     my $content = $file->content;
     if($content =~ s{^#\s*EXAMPLE:\s*(.*)\s*$}{$self->_slurp_example($1)."\n"}meg)
     {
@@ -104,7 +104,7 @@ and it won't be a verbatim paragraph at all.
   sub _slurp_example
   {
     my($self, $filename) = @_;
- 
+
     my $fh;
 
     if(my $file = first { $_->name eq $filename } @{ $self->zilla->files })
@@ -115,22 +115,22 @@ and it won't be a verbatim paragraph at all.
     elsif($file = $self->zilla->root->child($filename))
     {
       $self->log_fatal("no such example file $filename") unless -r $file;
-      $fh = $file->openr;  
+      $fh = $file->openr;
     }
 
     my $indent = ' ' x $self->indent;
 
-    while(<$fh>)
+    while(my $line = <$fh>)
     {
       if($self->remove_boiler)
       {
-        next if /^\s*$/;
-        next if /^#!\/usr\/bin\/perl/;
-        next if /^use strict;$/;
-        next if /^use warnings;$/;
+        next if $line =~ /^\s*$/;
+        next if $line =~ /^#!\/usr\/bin\/perl/;
+        next if $line =~ /^use strict;$/;
+        next if $line =~ /^use warnings;$/;
         return '' if eof $fh;
       }
-      return join "\n", map { "$indent$_" } split /\n/, $_ . do { local $/; my $rest = <$fh>; defined $rest ? $rest : '' };
+      return join "\n", map { "$indent$_" } split /\n/, $line . do { local $/; my $rest = <$fh>; defined $rest ? $rest : '' };
     }
 
   }
