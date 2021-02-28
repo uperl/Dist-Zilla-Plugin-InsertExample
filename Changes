@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.10      2021-02-28 06:36:57 -0700
   - Fix bug where utf8 scripts would not be inserted with
     strange diagnostic (gh#5)
 
