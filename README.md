@@ -1,4 +1,4 @@
-# Dist::Zilla::Plugin::InsertExample [![Build Status](https://secure.travis-ci.org/plicease/Dist-Zilla-Plugin-InsertExample.png)](http://travis-ci.org/plicease/Dist-Zilla-Plugin-InsertExample)
+# Dist::Zilla::Plugin::InsertExample [![Build Status](https://api.travis-ci.com/plicease/Dist-Zilla-Plugin-InsertExample.svg?branch=master)](https://travis-ci.com/github/plicease/Dist-Zilla-Plugin-InsertExample)
 
 Insert example into your POD from a file
 
@@ -6,29 +6,37 @@ Insert example into your POD from a file
 
 In your dist.ini:
 
-    [InsertExample]
+```
+[InsertExample]
+```
 
 In your POD:
 
-    =head1 EXAMPLE
-    
-    Here is an exaple that writes hello world to the terminal:
-    
-    # EXAMPLE: example/hello.pl
+```
+=head1 EXAMPLE
+
+Here is an exaple that writes hello world to the terminal:
+
+# EXAMPLE: example/hello.pl
+```
 
 File in your dist named example/hello.pl
 
-    #!/usr/bin/perl
-    say 'hello world';
+```
+#!/usr/bin/perl
+say 'hello world';
+```
 
 After dzil build your POD becomes:
 
-    =head1 EXAMPLE
-    
-    Here is an example that writes hello world to the terminal:
-    
-     #!/usr/bin/perl
-     say 'hello world';
+```
+=head1 EXAMPLE
+
+Here is an example that writes hello world to the terminal:
+
+ #!/usr/bin/perl
+ say 'hello world';
+```
 
 and example/hello.pl is there too (unless you prune it with another
 plugin).
