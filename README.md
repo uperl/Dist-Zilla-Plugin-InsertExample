@@ -47,7 +47,7 @@ This plugin takes examples included in your distribution and
 inserts them in your POD where you have an EXAMPLE directive.
 This allows you to keep a version in the distribution which
 can be run by you and your users, as well as making it
-available in your POD documentation, without the need for 
+available in your POD documentation, without the need for
 updating example scripts in multiple places.
 
 When the example is inserted into your pod a space will be appended
