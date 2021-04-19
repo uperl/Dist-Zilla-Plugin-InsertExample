@@ -125,6 +125,7 @@ and it won't be a verbatim paragraph at all.
       {
         next if $line =~ /^\s*$/;
         next if $line =~ /^#!\/usr\/bin\/perl/;
+        next if $line =~ /^#!\/usr\/bin\/env perl/;
         next if $line =~ /^use strict;$/;
         next if $line =~ /^use warnings;$/;
         return '' if eof $fh;
