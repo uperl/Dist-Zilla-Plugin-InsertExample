@@ -7,6 +7,7 @@ package Dist::Zilla::Plugin::InsertExample {
   use Moose;
   use Encode qw( encode );
   use List::Util qw( first );
+  use experimental qw( signatures );
 
   # ABSTRACT: Insert example into your POD from a file
 
@@ -84,16 +85,13 @@ and it won't be a verbatim paragraph at all.
   has remove_boiler => (is => 'ro', isa => 'Int');
   has indent        => (is => 'ro', isa => 'Int', default => 1);
 
-  sub munge_files
+  sub munge_files ($self)
   {
-    my($self) = @_;
     $self->munge_file($_) for $self->found_files->@*;
   }
 
-  sub munge_file
+  sub munge_file ($self, $file)
   {
-    my($self, $file) = @_;
-
     my $content = $file->content;
     if($content =~ s{^#\s*EXAMPLE:\s*(.*)\s*$}{$self->_slurp_example($1)."\n"}meg)
     {
@@ -102,10 +100,8 @@ and it won't be a verbatim paragraph at all.
     }
   }
 
-  sub _slurp_example
+  sub _slurp_example ($self, $filename)
   {
-    my($self, $filename) = @_;
-
     my $fh;
 
     if(my $file = first { $_->name eq $filename } $self->zilla->files->@*)
