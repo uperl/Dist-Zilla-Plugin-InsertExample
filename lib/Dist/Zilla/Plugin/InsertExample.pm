@@ -87,7 +87,7 @@ and it won't be a verbatim paragraph at all.
   sub munge_files
   {
     my($self) = @_;
-    $self->munge_file($_) for @{ $self->found_files };
+    $self->munge_file($_) for $self->found_files->@*;
   }
 
   sub munge_file
@@ -108,7 +108,7 @@ and it won't be a verbatim paragraph at all.
 
     my $fh;
 
-    if(my $file = first { $_->name eq $filename } @{ $self->zilla->files })
+    if(my $file = first { $_->name eq $filename } $self->zilla->files->@*)
     {
       my $content = encode 'UTF-8', $file->content;
       open $fh, '<', \$content
