@@ -1,4 +1,4 @@
-# Dist::Zilla::Plugin::InsertExample [![Build Status](https://api.travis-ci.com/plicease/Dist-Zilla-Plugin-InsertExample.svg?branch=main)](https://travis-ci.com/github/plicease/Dist-Zilla-Plugin-InsertExample)
+# Dist::Zilla::Plugin::InsertExample [![Build Status](https://travis-ci.org/uperl/Dist-Zilla-Plugin-InsertExample.svg?branch=main)](https://travis-ci.org/uperl/Dist-Zilla-Plugin-InsertExample) ![linux](https://github.com/uperl/Dist-Zilla-Plugin-InsertExample/workflows/linux/badge.svg) ![macos](https://github.com/uperl/Dist-Zilla-Plugin-InsertExample/workflows/macos/badge.svg) ![windows](https://github.com/uperl/Dist-Zilla-Plugin-InsertExample/workflows/windows/badge.svg) ![cygwin](https://github.com/uperl/Dist-Zilla-Plugin-InsertExample/workflows/cygwin/badge.svg) ![msys2-mingw](https://github.com/uperl/Dist-Zilla-Plugin-InsertExample/workflows/msys2-mingw/badge.svg)
 
 Insert example into your POD from a file
 

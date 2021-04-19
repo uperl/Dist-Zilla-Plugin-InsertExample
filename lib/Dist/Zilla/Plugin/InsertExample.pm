@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use 5.014;
+use 5.024;
 
 package Dist::Zilla::Plugin::InsertExample {
 
