@@ -2,6 +2,8 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
   - Perl 5.24 is now required (gh#6)
+  - Fix tests that were commented out by mistake in 0.10 (gh#6)
+  - Move to new GitHub org
 
 0.10      2021-02-28 06:36:57 -0700
   - Fix bug where utf8 scripts would not be inserted with
