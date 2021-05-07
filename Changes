@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Back off on Perl prereq: Require only 5.20+ (gh#7)
 
 0.11      2021-04-19 03:34:12 -0600
   - Perl 5.24 is now required (gh#6)
