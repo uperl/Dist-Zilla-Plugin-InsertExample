@@ -10,7 +10,7 @@ package Dist::Zilla::Plugin::InsertExample {
   use MooseX::Types::Moose qw(ArrayRef Str RegexpRef);
 
   use Encode qw( encode );
-  use List::Util qw( first );
+  use List::Util qw( first any );
   use experimental qw( signatures postderef );
 
   # ABSTRACT: Insert example into your POD from a file
@@ -148,11 +148,11 @@ and it won't be a verbatim paragraph at all.
     {
       if($self->remove_boiler)
       {
-          if( @{ $self->matches_boiler_barrier } )
+          if( $self->matches_boiler_barrier->@* )
           {
               if($in_boiler)
               {
-                  $in_boiler = 0 if grep $line =~ $_, @{ $self->matches_boiler_barrier };
+                  $in_boiler = 0 if any { $line =~ $_ } $self->matches_boiler_barrier->@*;
                   next;
               }
           }
