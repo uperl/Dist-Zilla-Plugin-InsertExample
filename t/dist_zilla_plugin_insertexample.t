@@ -54,7 +54,10 @@ subtest 'remove boiler via barrier' => sub {
         'source/dist.ini' => simple_ini(
           {},
           [ 'GatherDir' => {} ],
-          [ 'InsertExample' => { remove_boiler => 1, match_barrier => 'BARRIER$' } ],
+          [ 'InsertExample' => { remove_boiler => 1,
+                                 match_boiler_barrier => 'BARRIER$',
+                                 match_boiler_barrier => '^# BOILER'
+                                 } ],
         )
       }
     }
@@ -63,7 +66,7 @@ subtest 'remove boiler via barrier' => sub {
   $tzil->build;
 
   my($pm) = grep { $_->name eq 'lib/DZT.pm' } $tzil->files->@*;
-  ok $pm->content !~ m{^ # BOILERPLATE BARRIER;$}m, "module contains example file";
+  ok $pm->content !~ m{BOILERPLATE BARRIER}m, "barrier obeyed";
 };
 
 
