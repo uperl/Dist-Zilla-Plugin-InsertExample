@@ -66,6 +66,14 @@ source root.
 Remove the `#!/usr/bin/perl`, `use strict;` or `use warnings;` from
 the beginning of your example before inserting them into the POD.
 
+If ["match\_barrier"](#match_barrier) is also set, it instead removes all lines up-to
+and including the line matched by ["match\_barrier"](#match_barrier).
+
+## match\_barrier
+
+A regular expression matching a line indicating the end of
+boilerplate.  This must be used in conjunction with ["remove\_boiler"](#remove_boiler).
+
 ## indent
 
 Specifies the number of spaces to indent by.  This is 1 by default,
