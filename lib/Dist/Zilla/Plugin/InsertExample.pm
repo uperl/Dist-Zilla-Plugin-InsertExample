@@ -77,7 +77,8 @@ and including the line matched by L</match_boiler_barrier>.
 =head2 match_boiler_barrier
 
 A regular expression matching a line indicating the end of
-boilerplate.  This must be used in conjunction with L</remove_boiler>.
+boilerplate.  This option may be used multiple times.
+It must be used in conjunction with L</remove_boiler>.
 
 =head2 indent
 
@@ -96,12 +97,16 @@ and it won't be a verbatim paragraph at all.
 
   has remove_boiler => (is => 'ro', isa => 'Int');
   {
-      my $type = subtype as RegexpRef;
-      coerce $type, from Str, via {  qr/$_/ };
-      has match_boiler_barrier => ( is => 'ro', isa => $type, coerce => 1, predicate => 'has_match_boiler_barrier' );
+      my $type = subtype as ArrayRef[RegexpRef];
+      coerce $type, from ArrayRef[Str], via { [map { qr/$_/ } @$_ ]};
+      has matches_boiler_barrier => ( is => 'ro', isa => $type, coerce => 1, default => sub { [] } );
   }
 
   has indent        => (is => 'ro', isa => 'Int', default => 1);
+
+
+  sub mvp_aliases { +{ qw( match_boiler_barrier  matches_boiler_barrier ) } }
+  sub mvp_multivalue_args { qw( matches_boiler_barrier ) }
 
   sub munge_files ($self)
   {
@@ -143,11 +148,11 @@ and it won't be a verbatim paragraph at all.
     {
       if($self->remove_boiler)
       {
-          if($self->has_match_boiler_barrier)
+          if( @{ $self->matches_boiler_barrier } )
           {
               if($in_boiler)
               {
-                  $in_boiler = 0 if $line =~ $self->match_boiler_barrier;
+                  $in_boiler = 0 if grep $line =~ $_, @{ $self->matches_boiler_barrier };
                   next;
               }
           }

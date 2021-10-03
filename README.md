@@ -66,13 +66,14 @@ source root.
 Remove the `#!/usr/bin/perl`, `use strict;` or `use warnings;` from
 the beginning of your example before inserting them into the POD.
 
-If ["match\_barrier"](#match_barrier) is also set, it instead removes all lines up-to
-and including the line matched by ["match\_barrier"](#match_barrier).
+If ["match\_boiler\_barrier"](#match_boiler_barrier) is also set, it instead removes all lines up-to
+and including the line matched by ["match\_boiler\_barrier"](#match_boiler_barrier).
 
-## match\_barrier
+## match\_boiler\_barrier
 
 A regular expression matching a line indicating the end of
-boilerplate.  This must be used in conjunction with ["remove\_boiler"](#remove_boiler).
+boilerplate.  This option may be used multiple times.
+It must be used in conjunction with ["remove\_boiler"](#remove_boiler).
 
 ## indent
 
