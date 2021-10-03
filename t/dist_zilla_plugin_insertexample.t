@@ -24,6 +24,49 @@ subtest basics => sub {
   ok $pm->content =~ m{^ say 'hello world';$}m, "module contains example file";
 };
 
+subtest 'remove boiler' => sub {
+
+  my $tzil = Builder->from_config(
+    { dist_root => 'corpus/DZT' },
+    {
+      add_files => {
+        'source/dist.ini' => simple_ini(
+          {},
+          [ 'GatherDir' => {} ],
+          [ 'InsertExample' => { remove_boiler => 1} ],
+        )
+      }
+    }
+  );
+
+  $tzil->build;
+
+  my($pm) = grep { $_->name eq 'lib/DZT.pm' } $tzil->files->@*;
+  ok $pm->content !~ m{^ use string;$}m, "module contains example file";
+};
+
+subtest 'remove boiler via barrier' => sub {
+
+  my $tzil = Builder->from_config(
+    { dist_root => 'corpus/DZT4' },
+    {
+      add_files => {
+        'source/dist.ini' => simple_ini(
+          {},
+          [ 'GatherDir' => {} ],
+          [ 'InsertExample' => { remove_boiler => 1, match_barrier => 'BARRIER$' } ],
+        )
+      }
+    }
+  );
+
+  $tzil->build;
+
+  my($pm) = grep { $_->name eq 'lib/DZT.pm' } $tzil->files->@*;
+  ok $pm->content !~ m{^ # BOILERPLATE BARRIER;$}m, "module contains example file";
+};
+
+
 subtest 'basics file not in gather but on disk' => sub {
 
   my $tzil = Builder->from_config(
