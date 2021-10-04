@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Added match_boiler_barrier option (gh#9 djerius++)
 
 0.14      2021-05-10 10:28:53 -0600
   - Re-index

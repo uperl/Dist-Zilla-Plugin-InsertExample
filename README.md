@@ -85,7 +85,11 @@ and it won't be a verbatim paragraph at all.
 
 # AUTHOR
 
-Graham Ollis <plicease@cpan.org>
+Author: Graham Ollis <plicease@cpan.org>
+
+Contributors:
+
+Diab Jerius (DJERIUS)
 
 # COPYRIGHT AND LICENSE
 

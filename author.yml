@@ -5,6 +5,9 @@ pod_spelling_system:
   stopwords:
     - ini
     - dzil
+    - DJERIUS
+    - Diab
+    - Jerius
 
 pod_coverage:
   # format is "Class#method" or "Class", regex allowed
