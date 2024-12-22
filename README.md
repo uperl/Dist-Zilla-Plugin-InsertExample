@@ -1,4 +1,4 @@
-# Dist::Zilla::Plugin::InsertExample ![linux](https://github.com/uperl/Dist-Zilla-Plugin-InsertExample/workflows/linux/badge.svg) ![macos](https://github.com/uperl/Dist-Zilla-Plugin-InsertExample/workflows/macos/badge.svg) ![windows](https://github.com/uperl/Dist-Zilla-Plugin-InsertExample/workflows/windows/badge.svg) ![msys2-mingw](https://github.com/uperl/Dist-Zilla-Plugin-InsertExample/workflows/msys2-mingw/badge.svg)
+# Dist::Zilla::Plugin::InsertExample ![linux](https://github.com/uperl/Dist-Zilla-Plugin-InsertExample/workflows/linux/badge.svg) ![macos](https://github.com/uperl/Dist-Zilla-Plugin-InsertExample/workflows/macos/badge.svg) ![windows](https://github.com/uperl/Dist-Zilla-Plugin-InsertExample/workflows/windows/badge.svg)
 
 Insert example into your POD from a file
 
