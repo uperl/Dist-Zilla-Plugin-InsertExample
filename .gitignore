@@ -1,3 +1,5 @@
 /Dist-Zilla-Plugin-InsertExample-*
 /.build
 /tmp
+*.old
+*.orig

@@ -1,4 +1,4 @@
-# Dist::Zilla::Plugin::InsertExample ![linux](https://github.com/uperl/Dist-Zilla-Plugin-InsertExample/workflows/linux/badge.svg) ![macos](https://github.com/uperl/Dist-Zilla-Plugin-InsertExample/workflows/macos/badge.svg) ![windows](https://github.com/uperl/Dist-Zilla-Plugin-InsertExample/workflows/windows/badge.svg) ![cygwin](https://github.com/uperl/Dist-Zilla-Plugin-InsertExample/workflows/cygwin/badge.svg) ![msys2-mingw](https://github.com/uperl/Dist-Zilla-Plugin-InsertExample/workflows/msys2-mingw/badge.svg)
+# Dist::Zilla::Plugin::InsertExample ![linux](https://github.com/uperl/Dist-Zilla-Plugin-InsertExample/workflows/linux/badge.svg) ![macos](https://github.com/uperl/Dist-Zilla-Plugin-InsertExample/workflows/macos/badge.svg) ![windows](https://github.com/uperl/Dist-Zilla-Plugin-InsertExample/workflows/windows/badge.svg) ![msys2-mingw](https://github.com/uperl/Dist-Zilla-Plugin-InsertExample/workflows/msys2-mingw/badge.svg)
 
 Insert example into your POD from a file
 
@@ -93,7 +93,7 @@ Diab Jerius (DJERIUS)
 
 # COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Graham Ollis.
+This software is copyright (c) 2013-2024 by Graham Ollis.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
